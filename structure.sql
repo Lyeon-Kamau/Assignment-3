@@ -58,9 +58,7 @@ CREATE TABLE PointsHistory (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
     FOREIGN KEY (RentalID) REFERENCES Rentals(RentalID)
 );
-## 3. Create the Loyalty Points Trigger
 
-sql
 DELIMITER $$
 
 CREATE TRIGGER trg_award_loyalty_points
@@ -96,10 +94,7 @@ END$$
 DELIMITER ;
 
 
-## 4. Test the Trigger
 
-sql
--- Check current calculation parameters
 SELECT 
     CURDATE() AS TodayDate,
     DAY(LAST_DAY(CURDATE())) AS TotalDaysInJanuary,
@@ -107,7 +102,6 @@ SELECT
     DAY(LAST_DAY(CURDATE())) - DAY(CURDATE()) AS DaysRemainingInMonth,
     (DAY(LAST_DAY(CURDATE())) - DAY(CURDATE())) / 8.0 AS PointsPerCompletion;
 
--- BEFORE: View current points status
 SELECT 
     c.CustomerID,
     c.CustomerName,
@@ -127,7 +121,7 @@ SET Status = 'Completed',
     ReturnDate = CURDATE()
 WHERE RentalID = 1;
 
--- Check Sarah's points
+
 SELECT c.CustomerName, cp.TotalPoints, cp.LastUpdated
 FROM Customers c
 JOIN CustomerPoints cp ON c.CustomerID = cp.CustomerID
@@ -171,7 +165,7 @@ JOIN Vehicles v ON r.VehicleID = v.VehicleID
 ORDER BY ph.AwardedDate DESC;
 
 
-## 5. Verify Trigger Only Fires on Status Change
+Verify Trigger Only Fires on Status Change
 
 sql
 -- TEST: Update an already completed rental 
@@ -183,7 +177,7 @@ WHERE RentalID = 4;
 
 SELECT TotalPoints FROM CustomerPoints WHERE CustomerID = 4;
 
--- TEST: Update Active rental without completing it 
+
 SELECT TotalPoints FROM CustomerPoints WHERE CustomerID = 2;
 
 UPDATE Rentals
@@ -193,7 +187,6 @@ WHERE RentalID = 9;
 SELECT TotalPoints FROM CustomerPoints WHERE CustomerID = 2;  
 
 
-## 6. Complete Loyalty Dashboard Query
 
 sql
 -- Comprehensive loyalty program dashboard
