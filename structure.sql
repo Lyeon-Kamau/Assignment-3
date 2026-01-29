@@ -1,4 +1,5 @@
--- Customers Table
+-- Customers Table--
+
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY AUTO_INCREMENT,
     CustomerName VARCHAR(100) NOT NULL,
@@ -8,7 +9,8 @@ CREATE TABLE Customers (
     RegistrationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Vehicles Table
+-- Vehicles Table--
+
 CREATE TABLE Vehicles (
     VehicleID INT PRIMARY KEY AUTO_INCREMENT,
     Make VARCHAR(50) NOT NULL,
@@ -20,7 +22,7 @@ CREATE TABLE Vehicles (
     CreatedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Rentals Table (THE KEY TABLE FOR THIS EXERCISE)
+-- Rentals Table --
 CREATE TABLE Rentals (
     RentalID INT PRIMARY KEY AUTO_INCREMENT,
     CustomerID INT NOT NULL,
@@ -35,7 +37,7 @@ CREATE TABLE Rentals (
     FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID)
 );
 
--- CustomerPoints Table (FOR LOYALTY PROGRAM)
+-- CustomerPoints Table --
 CREATE TABLE CustomerPoints (
     PointID INT PRIMARY KEY AUTO_INCREMENT,
     CustomerID INT NOT NULL,
@@ -45,7 +47,7 @@ CREATE TABLE CustomerPoints (
     UNIQUE KEY (CustomerID)
 );
 
--- PointsHistory Table (AUDIT TRAIL - OPTIONAL BUT RECOMMENDED)
+-- PointsHistory Table --
 CREATE TABLE PointsHistory (
     HistoryID INT PRIMARY KEY AUTO_INCREMENT,
     CustomerID INT NOT NULL,
