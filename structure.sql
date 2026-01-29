@@ -164,10 +164,6 @@ JOIN Rentals r ON ph.RentalID = r.RentalID
 JOIN Vehicles v ON r.VehicleID = v.VehicleID
 ORDER BY ph.AwardedDate DESC;
 
-
-Verify Trigger Only Fires on Status Change
-
-sql
 -- TEST: Update an already completed rental 
 SELECT TotalPoints FROM CustomerPoints WHERE CustomerID = 4;
 
@@ -188,7 +184,6 @@ SELECT TotalPoints FROM CustomerPoints WHERE CustomerID = 2;
 
 
 
-sql
 -- Comprehensive loyalty program dashboard
 SELECT 
     c.CustomerID,
